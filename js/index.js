@@ -18,3 +18,9 @@ nav1[2].addEventListener('mouseover', (event) => {
       }, 1000);
     }, false);
 
+   window.addEventListener('keydown', (event) => {
+       if(event.key === 's' && event.ctrlKey) {
+           event.preventDefault();
+           alert('Save complete')
+       }
+   })
