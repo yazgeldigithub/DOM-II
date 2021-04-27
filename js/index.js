@@ -24,3 +24,20 @@ nav1[2].addEventListener('mouseover', (event) => {
            alert('Save complete')
        }
    })
+
+   window.addEventListener('load', (event) => {
+       alert('Page is fully loaded')
+   } )
+
+ const selectElement = document.querySelector('.destination1')
+
+ selectElement.addEventListener('change',(event) => {
+const result = document.querySelector('.result')
+result.textContent = `You like ${event.target.value}`
+ })
+
+ let wheelEvent =  document.getElementById('wheel').addEventListener('wheel', myFunction)
+
+ function myFunction() {
+    this.style.fontSize = "35px";
+  }
