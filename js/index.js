@@ -1,43 +1,102 @@
 // Your code goes here
+let busImg = document.querySelector('.intro img');
+busImg.style.transition = 'all 1s';
 
-let nav1 = document.querySelectorAll('a')
-nav1[0].addEventListener('click', (event) => {
-    alert('You Clicked on Home Button!')
-  })
+// zoom the bus image in and out
 
-nav1[1].addEventListener('dblclick', (event) => {
-    nav1[1].style.color = 'orange'
-})
+// mouseover
+busImg.addEventListener('mouseover', () => {
+	busImg.style.transform = 'scale(1.5)';
+});
 
-nav1[2].addEventListener('mouseover', (event) => {
-    nav1[2].style.color = 'red'
+// mouseout
+busImg.addEventListener('mouseout', () => {
+	busImg.style.transform = 'scale(1)';
+});
 
-    // reset the color after a short delay
-    setTimeout(function() {
-        event.target.style.color = "";
-      }, 1000);
-    }, false);
+//spin the map image
+// click
+let mapImg = document.querySelector('.img-content img');
+mapImg.style.transition = 'all 1s';
+let delta = 360;
+mapImg.addEventListener('click', () => {
+	mapImg.style.transform = `rotate(${delta}deg)`;
+	delta += 360;
+});
 
-   window.addEventListener('keydown', (event) => {
-       if(event.key === 's' && event.ctrlKey) {
-           event.preventDefault();
-           alert('Save complete')
-       }
-   })
+// double click
+const welcomeMessage = document.querySelector('.intro h2');
+const header = document.querySelector('.intro');
 
-   window.addEventListener('load', (event) => {
-       alert('Page is fully loaded')
-   } )
+welcomeMessage.addEventListener('dblclick', e => {
+	e.stopPropagation();
+	if (welcomeMessage.textContent !== welcomeMessage.textContent.toUpperCase()) {
+		welcomeMessage.textContent = welcomeMessage.textContent.toUpperCase();
+	} else {
+		welcomeMessage.textContent = welcomeMessage.textContent.toLowerCase();
+	}
+});
 
- const selectElement = document.querySelector('.destination1')
+header.addEventListener('dblclick', () => {
+	if (header.style.backgroundColor === '') {
+		header.style.backgroundColor = 'blue';
+	} else {
+		header.style.backgroundColor = '';
+	}
+});
 
- selectElement.addEventListener('change',(event) => {
-const result = document.querySelector('.result')
-result.textContent = `You like ${event.target.value}`
- })
+// prevent Default
+Array.from(document.links).forEach(link => {
+	link.addEventListener('click', e => {
+		e.preventDefault();
+		console.log('is working');
+	});
+});
 
- let wheelEvent =  document.getElementById('wheel').addEventListener('wheel', myFunction)
+// keydown
+const divs = document.querySelectorAll('div');
+document.addEventListener('keydown', e => {
+	if (e.key === 'Escape') {
+		divs.forEach(div => {
+			div.style.backgroundColor = `#${Math.floor(Math.random() * 1000000)}`;
+		});
+	}
+});
 
- function myFunction() {
-    this.style.fontSize = "35px";
-  }
+// keyup
+document.addEventListener('keyup', e => {
+	if (e.key === 'Escape') {
+		mapImg.style.transform = 'scale(1)';
+		riverImg.style.transform = 'skew(0deg, 0deg)';
+		divs.forEach(div => {
+			div.style.backgroundColor = `white`;
+		});
+	}
+});
+
+// scroll
+document.addEventListener('scroll', () => {
+	divs.forEach(div => {
+		div.style.backgroundColor = `#${Math.floor(Math.random() * 1000000)}`;
+	});
+});
+
+// resize
+window.addEventListener('resize', () => {
+	divs.forEach(div => {
+		div.style.backgroundColor = `#${Math.floor(Math.random() * 1000000)}`;
+	});
+});
+
+// 9 animation end
+mapImg.addEventListener('pointerleave', () => {
+	mapImg.style.transform = 'scale(1.5)';
+});
+
+// 10 pointer out
+let riverImg = document.querySelector('.img-fluid');
+riverImg.style.transition = 'all 1s';
+riverImg.addEventListener('pointerout', () => {
+	console.log('Hi Im working');
+	riverImg.style.transform = 'skew(30deg, 20deg)';
+});
